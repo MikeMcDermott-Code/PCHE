@@ -10,7 +10,8 @@
 # Email:       m.mmcdermott@sheffield.ac.uk       #
 #-------------------------------------------------#
 
-The following README file contains instructions for the OpenFOAM package for the macro scale printed circuit heat exchanger.
+The following README file contains instructions for the OpenFOAM package for the macro scale printed circuit heat exchanger. Full paper found here: https://doi.org/10.1016/j.nucengdes.2024.113084
+The work in the paper is tested for an Airfin HX. There is an additional case for a zig-zag geometry with 2 inlet and outlets, both in Cases.
 
 ------- Preamble ------- 
 
