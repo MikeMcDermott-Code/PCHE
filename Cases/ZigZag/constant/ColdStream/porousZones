@@ -1,0 +1,225 @@
+// Friction Factor on 10 ColdStream Cell Zones 
+
+CentralChannelBottomCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionI;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (1 0 0);
+                y          (0 1 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+CentralChannelTopCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionII;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (1 0 0);
+                y          (0 1 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+InletEnterBottomCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionIII;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+OutletEnterBottomCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionIV;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+InletEnterTopCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionV;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+OutletEnterTopCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionVI;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+InletBottomCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionVII;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+OutletBottomCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionVIII;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+InletTopCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionIX;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+OutletTopCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       RegionX;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+
+
+// ************************************************************************* //

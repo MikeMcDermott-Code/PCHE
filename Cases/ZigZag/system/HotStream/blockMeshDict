@@ -1,0 +1,113 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale 1;
+
+#include "$FOAM_CASE/Geometry.txt"
+
+vertices
+(
+	// Central channel
+    ($L_chB_min $W_ch_min $D_ch_min) // 0
+    ($L_chB_max $W_ch_min $D_ch_min) // 1
+    ($L_chB_max $W_ch_max $D_ch_min) // 2
+    ($L_chB_min $W_ch_max $D_ch_min) // 3
+    ($L_chB_min $W_ch_min $D_ch_max) // 4
+    ($L_chB_max $W_ch_min $D_ch_max) // 5
+    ($L_chB_max $W_ch_max $D_ch_max) // 6
+    ($L_chB_min $W_ch_max $D_ch_max) // 7
+
+	// Inlet
+    ($L_chC_max $W_ch_min $D_ch_min) // 8
+    ($L_chC_max $W_ch_max $D_ch_min) // 9
+    ($L_chC_max $W_ch_min $D_ch_max) // 10
+    ($L_chC_max $W_ch_max $D_ch_max) // 11
+
+	// Outlet
+    ($L_chC_min $W_ch_min $D_ch_min) // 12
+    ($L_chC_min $W_ch_max $D_ch_min) // 13
+    ($L_chC_min $W_ch_min $D_ch_max) // 14
+    ($L_chC_min $W_ch_max $D_ch_max) // 15
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) RegionI ($x_cells_h $y_cells_h 1) simpleGrading (1 1 1) // Central blocks
+    hex (1 8 9 2 5 10 11 6) RegionII (10 $y_cells_h 1) simpleGrading (1 1 1) // Inlet
+    hex (12 0 3 13 14 4 7 15) RegionIII (10 $y_cells_h 1) simpleGrading (1 1 1) // Outlet
+);
+
+edges
+(
+);
+
+boundary
+(
+    wallTopHot
+    {
+        type wall;
+        faces
+        (
+            (13 3 7 15)
+            (3 2 6 7)
+            (2 9 11 6)
+        );
+    }
+    wallBottomHot
+    {
+        type wall;
+        faces
+        (
+            (12 0 4 14)
+            (0 1 5 4)
+            (1 8 10 5)
+        );
+    }
+    inletHot
+    {
+        type patch;
+        faces
+        (
+            (8 9 11 10)
+        );
+    }
+    outletHot
+    {
+        type patch;
+        faces
+        (
+            (12 13 15 14)
+        );
+    }
+    frontAndBackHot //2D
+    {
+        type empty;
+        faces
+        (
+            (0 1 2 3)
+            (4 5 6 7)
+            (12 0 3 13)
+            (14 4 7 15) 
+            (1 8 9 2)
+            (5 10 11 6)                                      
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

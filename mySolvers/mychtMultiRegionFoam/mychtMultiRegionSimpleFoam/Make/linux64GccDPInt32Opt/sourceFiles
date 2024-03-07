@@ -1,0 +1,4 @@
+SOURCE = \
+mychtMultiRegionSimpleFoam.C \
+
+# sources

@@ -1,0 +1,68 @@
+#
+#-------------------------------------------------#
+# Contributor: Michael McDermott                  #
+# Updated on:  March 2023                         #
+#-------------------------------------------------#
+# Topic:       Macroscale Heat Exchanger          #
+# OpenFOAM:    version v2212 (Foundation)         #
+#-------------------------------------------------#
+# Association: The University of Sheffield        #
+# Email:       m.mmcdermott@sheffield.ac.uk       #
+#-------------------------------------------------#
+
+The following README file contains instructions for the OpenFOAM package for the macro scale printed circuit heat exchanger.
+
+------- Preamble ------- 
+
+- Download OpenFOAMv2212 with precompiled libraries (this is a quicker install). Follow the instructions
+in the link: https://develop.openfoam.com/Development/openfoam/-/wikis/precompiled/debian
+
+- The overall file structure contains the Cases, fvOptions library (for the Nusselt number heat transfer),
+and the solver.
+
+- Go to the directory mySolvers/mychtMultiRegionFoam/mychtMultiRegionSimpleFoam. Run the command:
+
+wclean
+wmake
+
+- Similarly go to the directory myLibs/fvOptions. Run the command:
+
+wclean
+wmake
+
+------- Some Notes ------- 
+
+- The Cases directory contains the 2 developed cases for the Airfin HX and ZigZag HX. The files systems are very
+similair but are seperated for easy use.
+
+- The Variables.txt file contains key variables such as inlet temperature, Nusselt number values etc.
+The relevant #include code is used throughout the case so that the user only needs to adjust this file.
+
+- The Geometry.txt file contains key values such as channel length, channel width etc. This is important for 
+the Mesh contruction in Cases/<CaseName>/<region>/system/blockMeshDict.
+
+- The Cases/<CaseName>/<region>/constant directory contains porousZones where you can specify the friction factor terms.
+The naming of the cellZones here are linked back to the blockMeshDict file (e.g. RegionI, RegionII...).
+
+- The thermophysicalProperties file is dynamically linked to the thermoData directory, which has tabulated data based on pressure values.
+
+------- Running the case ------- 
+
+- Go to the Case file of interest, e.g. Cases/Airfin. Run the command:
+
+./run
+
+- This will run the case based on the time steps and runtime specified in controlDict. To track residuals, run the command:
+
+gnuplot Residuals.txt
+
+- To clean the directory run the command:
+
+./clean
+
+- Paraview can be used to check results.
+
+------- Feedback and questions ------- 
+
+For any issues or debugging, please email and I can make those changes. Thank you :)
+

@@ -1,0 +1,41 @@
+// * Geometry parameters * //
+L_ch		0.5755;						                // Length of channel
+W_ch		0.0943;						                // Width of channel
+D_ch		0.0150;						                // Depth of channel (2D, but finite)
+W_so		0.0127;						                // Width of solid wall
+L_bk		#eval{ $L_ch+2.0*$W_ch+4.0*$W_so };	 	    // Length of solid block
+W_bk		#eval{ $W_ch+2.0*$W_so }; 			        // Width of solid block
+
+/// * Channel coordinates * ///
+L_ch_max	#eval{ 0.5*$L_ch };		
+L_ch_min	#eval{ -0.5*$L_ch };		
+W_ch_max	#eval{ 0.5*$W_ch };
+W_ch_min	#eval{ -0.5*$W_ch };
+D_ch_max	#eval{ 0.5*$D_ch };
+D_ch_min	#eval{ -0.5*$D_ch };
+L_cr_max	#eval{ 0.5*$L_ch+$W_ch+$W_so };
+L_cr_min	#eval{ -0.5*$L_ch-$W_ch-$W_so };
+W_cr_max	#eval{ 0.5*$W_ch+$W_so };	
+W_cr_min	#eval{ -0.5*$W_ch-$W_so };
+
+X_cr_min	#eval{ -0.5*$L_ch-$W_so };
+X_cr_max	#eval{ 0.5*$L_ch+$W_so };
+I_ch_min	#eval{ -0.5*$W_ch-$W_so-0.05*$L_ch };
+O_ch_max	#eval{ 0.5*$W_ch+$W_so+0.05*$L_ch };
+
+halfAngle 45.0;
+radHalfAngle #eval{ degToRad($halfAngle) };
+
+/// * Solid coordinates * ///
+L_bk_max	#eval{ 0.5*$L_bk };
+L_bk_min	#eval{ -0.5*$L_bk };
+W_bk_max	#eval{ 0.5*$W_bk };
+W_bk_min	#eval{ -0.5*$W_bk };
+
+// * Mesh parameters* //
+x_cells_s 	200;		    // Number of streamwise cells in the solid block
+y_cells_s 	30;		        // Number of spanwise cells in the solid block
+x_cells_h 	200;		    // Number of streamwise cells in the hot stream central channel		
+y_cells_h 	30;		        // Number of spanwise cells in the hot stream central channel		
+x_cells_c 	200;		    // Number of streamwise cells in the cold stream central channel		
+y_cells_c 	30;		        // Number of spanwise cells in the cold stream central channel

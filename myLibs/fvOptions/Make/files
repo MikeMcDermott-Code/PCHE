@@ -1,0 +1,9 @@
+interRegionOption/interRegionOption.C
+
+/* Sources */
+
+interRegion = sources/interRegion
+$(interRegion)/interRegionHeatTransfer/interRegionHeatTransferModel/interRegionHeatTransferModel.C
+$(interRegion)/interRegionHeatTransfer/myvariableHeatTransfer/myvariableHeatTransfer.C
+
+LIB = $(FOAM_USER_LIBBIN)/mylibfvOptions

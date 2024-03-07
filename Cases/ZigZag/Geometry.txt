@@ -1,0 +1,33 @@
+// * Geometry parameters * //
+L_ch		0.280;						        // Length of channel
+W_ch		0.0655;						    // Width of channel
+D_ch		0.04319084;					// Depth of channel (2D, but finite)
+W_so		0.0131;						    // Width of solid wall
+
+/// * Coordinates * ///
+L_ch_max	#eval{ 0.5*$L_ch };		
+L_ch_min	#eval{-0.5*$L_ch };		
+W_ch_max	#eval{ 0.5*$W_ch };
+W_ch_min	#eval{-0.5*$W_ch };
+D_ch_max	#eval{ 0.5*$D_ch };
+D_ch_min	#eval{-0.5*$D_ch };
+L_chA_max	#eval{ 0.5*$L_ch + 0.5*$W_ch };
+L_chA_min	#eval{-0.5*$L_ch - 0.5*$W_ch };
+L_chB_max	#eval{ 0.5*$L_ch + 0.5*$W_ch + $W_so };
+L_chB_min	#eval{-0.5*$L_ch - 0.5*$W_ch - $W_so };
+inLen		0.1;
+L_chC_max	#eval{ 0.5*$L_ch + 0.5*$W_ch + $W_so + 0.5*$inLen*$L_ch };
+L_chC_min	#eval{-0.5*$L_ch - 0.5*$W_ch - $W_so - 0.5*$inLen*$L_ch };
+W_chA_max	#eval{ 0.5*$W_ch + $W_so };	
+W_chA_min	#eval{-0.5*$W_ch - $W_so };
+W_chB_max	#eval{ 0.5*$W_ch + $W_so + 0.5*$inLen*$L_ch};	
+W_chB_min	#eval{-0.5*$W_ch - $W_so - 0.5*$inLen*$L_ch};
+
+// * Mesh parameters* //
+x_cells_s 	150;		    // Number of streamwise cells in the solid block
+y_cells_s 	20;		        // Number of spanwise cells in the solid block
+x_cells_h 	150;		    // Number of streamwise cells in the hot stream central channel		
+y_cells_h 	20;		        // Number of spanwise cells in the hot stream central channel		
+x_cells_c 	100;		    // Number of streamwise cells in the cold stream central channel		
+y_cells_c 	20;		        // Number of spanwise cells in the cold stream central channel
+x_cells_cA 	10;		    	// Number of streamwise cells in the cold stream inlet/oulet enterance		

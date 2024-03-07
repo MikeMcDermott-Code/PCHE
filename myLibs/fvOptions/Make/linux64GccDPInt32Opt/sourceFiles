@@ -1,0 +1,6 @@
+SOURCE = \
+interRegionOption/interRegionOption.C \
+$(interRegion)/interRegionHeatTransfer/interRegionHeatTransferModel/interRegionHeatTransferModel.C \
+$(interRegion)/interRegionHeatTransfer/myvariableHeatTransfer/myvariableHeatTransfer.C \
+
+# sources

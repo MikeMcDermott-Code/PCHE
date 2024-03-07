@@ -1,0 +1,40 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include "$FOAM_CASE/Variables.txt"
+
+limitTHot // Temperature limiter for the HotStream
+{
+    type            limitTemperature;
+    active          yes;
+    selectionMode   all;
+    min             $TcInlet;
+    max             $ThInlet;
+}
+
+HotStreamToSolid // Heat Transfer between HotStream and Solid
+{
+    type            myvariableHeatTransfer;
+    nbrRegion   	Solid;
+    master	        false;
+    nbrModel       	SolidToHotStream;
+    fields          (h);
+    semiImplicit    no;
+}
+
+#include "porousZones"
+
+// ************************************************************************* //

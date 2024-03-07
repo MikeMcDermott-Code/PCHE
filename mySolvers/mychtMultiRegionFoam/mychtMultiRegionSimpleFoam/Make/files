@@ -1,0 +1,3 @@
+mychtMultiRegionSimpleFoam.C
+
+EXE = $(FOAM_USER_APPBIN)/mychtMultiRegionSimpleFoam

@@ -1,0 +1,155 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale 1; 
+
+#include "$FOAM_CASE/Geometry.txt"
+
+// Inlet curve arc locations
+Ixloc0		#eval{ $L_ch_min-(($W_ch+$W_so)*sin($radHalfAngle)) };
+Iyloc0		#eval{ $W_cr_min+(($W_ch+$W_so)*sin($radHalfAngle)) };
+Ixloc1		#eval{ $L_ch_min-($W_so*sin($radHalfAngle)) };
+Iyloc1		#eval{ $W_cr_min+($W_so*sin($radHalfAngle)) };
+// Outlet curve arc locations
+Oxloc0		#eval{ $L_ch_max+(($W_ch+$W_so)*sin($radHalfAngle)) };
+Oyloc0		#eval{ $W_cr_max-(($W_ch+$W_so)*sin($radHalfAngle)) };
+Oxloc1		#eval{ $L_ch_max+($W_so*sin($radHalfAngle)) };
+Oyloc1		#eval{ $W_cr_max-($W_so*sin($radHalfAngle)) };
+
+vertices
+(
+	// Central channel
+    ($L_ch_min $W_ch_min $D_ch_min) // 0
+    ($L_ch_max $W_ch_min $D_ch_min) // 1
+    ($L_ch_max $W_ch_max $D_ch_min) // 2
+    ($L_ch_min $W_ch_max $D_ch_min) // 3
+    ($L_ch_min $W_ch_min $D_ch_max) // 4
+    ($L_ch_max $W_ch_min $D_ch_max) // 5
+    ($L_ch_max $W_ch_max $D_ch_max) // 6
+    ($L_ch_min $W_ch_max $D_ch_max) // 7
+
+	// Inlet curve
+    ($L_cr_min $W_cr_min $D_ch_min) // 8
+    ($X_cr_min $W_cr_min $D_ch_min) // 9
+    ($L_cr_min $W_cr_min $D_ch_max) // 10
+    ($X_cr_min $W_cr_min $D_ch_max) // 11
+
+	// Outlet curve
+    ($L_cr_max $W_cr_max $D_ch_min) // 12
+    ($X_cr_max $W_cr_max $D_ch_min) // 13
+    ($L_cr_max $W_cr_max $D_ch_max) // 14
+    ($X_cr_max $W_cr_max $D_ch_max) // 15
+
+	// Outlet
+    ($L_cr_max $O_ch_max $D_ch_min) // 16
+    ($X_cr_max $O_ch_max $D_ch_min) // 17
+    ($L_cr_max $O_ch_max $D_ch_max) // 18
+    ($X_cr_max $O_ch_max $D_ch_max) // 19    
+
+	// Inlet
+    ($L_cr_min $I_ch_min $D_ch_min) // 20
+    ($X_cr_min $I_ch_min $D_ch_min) // 21
+    ($L_cr_min $I_ch_min $D_ch_max) // 22
+    ($X_cr_min $I_ch_min $D_ch_max) // 23    
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) porousBedCold ($x_cells_c $y_cells_c 1) simpleGrading (1 1 1) // Central blocks
+    hex (8 9 0 3 10 11 4 7) porousBedColdInletCurve ($y_cells_c $y_cells_c 1) simpleGrading (1 1 1) // Inlet curve
+    hex (1 12 13 2 5 14 15 6) porousBedColdOutletCurve ($y_cells_c $y_cells_c 1) simpleGrading (1 1 1) // Outlet curve
+    hex (13 12 16 17 15 14 18 19) porousBedColdOutlet ($y_cells_c 20 1) simpleGrading (1 1 1) // Outlet
+    hex (20 21 9 8 22 23 11 10) porousBedColdInlet ($y_cells_c 20 1) simpleGrading (1 1 1) // Inlet
+);
+
+edges
+(
+	arc 8 3  ($Ixloc0 $Iyloc0 $D_ch_min)
+	arc 10 7 ($Ixloc0 $Iyloc0 $D_ch_max)
+	arc 9 0  ($Ixloc1 $Iyloc1 $D_ch_min)
+	arc 11 4 ($Ixloc1 $Iyloc1 $D_ch_max)
+
+	arc 12 1 ($Oxloc0 $Oyloc0 $D_ch_min)
+	arc 5 14 ($Oxloc0 $Oyloc0 $D_ch_max)
+	arc 13 2 ($Oxloc1 $Oyloc1 $D_ch_min)
+	arc 15 6 ($Oxloc1 $Oyloc1 $D_ch_max)
+);
+
+boundary
+(
+    wallTopAirCold
+    {
+        type wall;
+        faces
+        (
+            (8 3 7 10)
+            (3 2 6 7)
+            (2 13 15 6)
+            (20 8 10 22)
+            (13 17 19 15)
+        );
+    }
+    wallBottomAirCold
+    {
+        type wall;
+        faces
+        (
+            (9 0 11 4)
+            (0 1 4 5)
+            (1 5 12 14)
+            (21 9 11 23)
+            (12 16 18 14)
+        );
+    }
+    outletAirCold
+    {
+        type patch;
+        faces
+        (
+            (17 16 18 19)
+        );
+    }
+    inletAirCold
+    {
+        type patch;
+        faces
+        (
+            (20 21 23 22)
+        );
+    }
+    frontAndBackCold //2D
+    {
+        type empty;
+        faces
+        (
+            (0 1 2 3)
+            (4 5 6 7)
+            (8 9 0 3)
+            (10 11 4 7)
+            (1 12 13 2)
+            (5 14 15 6)
+            (13 12 16 17)
+            (15 14 18 19)
+            (20 21 9 8)
+            (22 23 11 10)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

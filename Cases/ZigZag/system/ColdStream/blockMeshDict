@@ -1,0 +1,219 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale 1; 
+
+#include "$FOAM_CASE/Geometry.txt"
+
+vertices
+(
+	// Central channel bottom
+    ($L_ch_min $W_ch_min $D_ch_min) // 0
+    ($L_ch_max $W_ch_min $D_ch_min) // 1
+    ($L_chA_max 0 $D_ch_min) // 2
+    ($L_chA_min 0 $D_ch_min) // 3
+    ($L_ch_min $W_ch_min $D_ch_max) // 4
+    ($L_ch_max $W_ch_min $D_ch_max) // 5
+    ($L_chA_max 0 $D_ch_max) // 6
+    ($L_chA_min 0 $D_ch_max) // 7
+    
+	// Central channel top
+    ($L_ch_min $W_ch_max $D_ch_min) // 8
+    ($L_ch_max $W_ch_max $D_ch_min) // 9
+    ($L_ch_min $W_ch_max $D_ch_max) // 10
+    ($L_ch_max $W_ch_max $D_ch_max) // 11
+
+	// Inlet enter 1
+    ($L_chA_min $W_chA_min $D_ch_min) // 12
+    ($L_ch_min $W_chA_min $D_ch_min) // 13
+    ($L_chA_min $W_chA_min $D_ch_max) // 14
+    ($L_ch_min $W_chA_min $D_ch_max) // 15
+    
+	// Outlet enter 1
+    ($L_ch_max $W_chA_min $D_ch_min) // 16
+    ($L_chA_max $W_chA_min $D_ch_min) // 17
+    ($L_ch_max $W_chA_min $D_ch_max) // 18
+    ($L_chA_max $W_chA_min $D_ch_max) // 19
+
+	// Inlet enter 2
+    ($L_chA_min $W_chA_max $D_ch_min) // 20
+    ($L_ch_min $W_chA_max $D_ch_min) // 21
+    ($L_chA_min $W_chA_max $D_ch_max) // 22
+    ($L_ch_min $W_chA_max $D_ch_max) // 23
+    
+	// Outlet enter 2
+    ($L_ch_max $W_chA_max $D_ch_min) // 24
+    ($L_chA_max $W_chA_max $D_ch_min) // 25
+    ($L_ch_max $W_chA_max $D_ch_max) // 26
+    ($L_chA_max $W_chA_max $D_ch_max) // 27
+
+	// Inlet 1
+    ($L_chA_min $W_chB_min $D_ch_min) // 28
+    ($L_ch_min $W_chB_min $D_ch_min) // 29
+    ($L_chA_min $W_chB_min $D_ch_max) // 30
+    ($L_ch_min $W_chB_min $D_ch_max) // 31
+
+	// Outlet 1
+    ($L_ch_max $W_chB_min $D_ch_min) // 32
+    ($L_chA_max $W_chB_min $D_ch_min) // 33
+    ($L_ch_max $W_chB_min $D_ch_max) // 34
+    ($L_chA_max $W_chB_min $D_ch_max) // 35
+
+	// Inlet 2
+    ($L_chA_min $W_chB_max $D_ch_min) // 36
+    ($L_ch_min $W_chB_max $D_ch_min) // 37
+    ($L_chA_min $W_chB_max $D_ch_max) // 38
+    ($L_ch_min $W_chB_max $D_ch_max) // 39
+
+	// Outlet 2
+    ($L_ch_max $W_chB_max $D_ch_min) // 40
+    ($L_chA_max $W_chB_max $D_ch_min) // 41
+    ($L_ch_max $W_chB_max $D_ch_max) // 42
+    ($L_chA_max $W_chB_max $D_ch_max) // 43
+
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) RegionI ($x_cells_c $y_cells_c 1) simpleGrading (1 1 1)
+    hex (3 2 9 8 7 6 11 10) RegionII ($x_cells_c $y_cells_c 1) simpleGrading (1 1 1)
+    hex (12 13 0 3 14 15 4 7) RegionIII ($y_cells_c $x_cells_cA 1) simpleGrading (1 1 1)
+    hex (16 17 2 1 18 19 6 5) RegionIV ($y_cells_c $x_cells_cA 1) simpleGrading (1 1 1)
+    hex (3 8 21 20 7 10 23 22) RegionV ($y_cells_c $x_cells_cA 1) simpleGrading (1 1 1)
+    hex (9 2 25 24 11 6 27 26) RegionVI ($y_cells_c $x_cells_cA 1) simpleGrading (1 1 1)
+    hex (28 29 13 12 30 31 15 14) RegionVII ($y_cells_c 10 1) simpleGrading (1 1 1)
+    hex (32 33 17 16 34 35 19 18) RegionVIII ($y_cells_c 10 1) simpleGrading (1 1 1)
+    hex (20 21 37 36 22 23 39 38) RegionIX ($y_cells_c 10 1) simpleGrading (1 1 1)
+    hex (24 25 41 40 26 27 43 42) RegionX ($y_cells_c 10 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    wallBottomCold
+    {
+        type wall;
+        faces
+        (
+            (29 31 15 13)
+            (13 15 4 0)
+            (0 4 5 1)
+            (1 5 18 16)
+            (16 18 34 32)
+        );
+    }
+    wallTopCold
+    {
+        type wall;
+        faces
+        (
+            (37 39 23 21)        
+            (21 23 10 8)
+            (8 9 11 10)
+            (9 24 26 11)
+            (24 40 42 26)
+        );
+    }
+    inletBottomCold
+    {
+        type patch;
+        faces
+        (
+            (28 29 30 31)
+        );
+    }
+    outletBottomCold
+    {
+        type patch;
+        faces
+        (
+            (32 33 35 34)
+        );
+    }
+    inletTopCold
+    {
+        type patch;
+        faces
+        (
+            (36 37 39 38)
+        );
+    }
+    outletTopCold
+    {
+        type patch;
+        faces
+        (
+            (40 41 43 42)
+        );
+    }
+    wallLeftCold
+    {
+        type wall;
+        faces
+        (
+            (28 12 14 30)        
+            (12 3 7 14)
+            (3 20 22 7)
+            (20 36 38 22)
+        );
+    }
+    wallRightCold
+    {
+        type wall;
+        faces
+        (
+            (17 33 35 19)        
+            (2 17 19 6)
+            (25 2 6 27)
+            (41 25 27 43)
+        );
+    }
+    frontAndBackCold //2D
+    {
+        type empty;
+        faces
+        (
+            (28 29 13 12)
+            (30 31 15 14)
+            (12 13 0 3)
+            (14 15 4 7)
+            (0 1 2 3)
+            (4 5 6 7)
+            (16 17 2 1)
+            (18 19 6 5)
+            (33 32 17 16)
+            (34 35 19 18)
+            (36 37 21 20)
+            (38 39 23 22)
+            (20 21 8 3)
+            (22 23 10 7)
+            (3 2 9 8)
+            (7 6 11 10)
+            (9 2 25 24)
+            (11 6 27 26)
+            (24 25 41 40)
+            (26 27 43 42)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

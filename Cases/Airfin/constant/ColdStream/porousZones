@@ -1,0 +1,120 @@
+// Friction Factor on 5 ColdStream Cell Zones 
+
+#include "$FOAM_CASE/Geometry.txt"
+
+CentralChannelCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       porousBedCold;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (1 0 0);
+                y          (0 1 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+
+InletCurveCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       porousBedColdInletCurve;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_per_c $f_par_c 0);
+            coordinateSystem
+            {
+                origin     ($L_ch_min $W_cr_min 0);
+                axis       (0 0 1);
+                #includeEtc "caseDicts/general/coordinateSystem/cylindrical"
+            }
+        }
+    }
+}
+
+InletCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       porousBedColdInlet;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+
+OutletCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       porousBedColdOutlet;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_par_c $f_per_c 0);
+            coordinateSystem
+            {
+                x          (0 1 0);
+                y          (1 0 0);
+                #includeEtc "caseDicts/general/coordinateSystem/cartesianXY"
+            }
+        }
+    }
+}
+
+OutletCurveCold
+{
+    type           explicitPorositySource;
+    active         true;
+    explicitPorositySourceCoeffs
+    {
+        type           DarcyForchheimer;
+        selectionMode  cellZone;
+        cellZone       porousBedColdOutletCurve;
+        DarcyForchheimerCoeffs
+        {
+            d          [0 -2 0 0 0 0 0] (0 0 0);
+            f          [0 -1 0 0 0 0 0] ($f_per_c $f_par_c 0);
+            coordinateSystem
+            {
+                origin     ($L_ch_max $W_cr_max 0);
+                axis       (0 0 1);
+                #includeEtc "caseDicts/general/coordinateSystem/cylindrical"
+            }
+        }
+    }
+}
+
+// ************************************************************************* //

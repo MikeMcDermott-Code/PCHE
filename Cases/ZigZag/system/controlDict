@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs ("mylibfvOptions.so");
+
+application     mychtMultiRegionSimpleFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         2000;
+
+deltaT          1;
+
+writeControl    runTime;
+
+writeInterval   100;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+/*
+functions
+{
+    write_htc
+    {
+        type        writeFields;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        enabled     true;
+        region		Solid;
+        writeControl timeStep;   // Output at the same time as snapshots
+        writeInterval 100;         // Set to the simulation's time step (deltaT)
+        fields      (htc);       // Specify the field(s) you want to print
+        fileName    "htc";       // Output file name (without extension)
+        outputFormat ascii;      // Output format (e.g., raw, ascii, etc.)
+        precision   6;           // Output precision (number of decimal places)
+    }
+}
+*/
+// ************************************************************************* //

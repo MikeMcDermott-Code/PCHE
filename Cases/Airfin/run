@@ -1,0 +1,17 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# Generate macro mesh 
+echo -e "\n - Generating mesh"
+for region in $(foamListRegions)
+do
+    runApplication -s "$region" blockMesh -region $region
+done
+
+# Run macro case
+echo -e "\n - Running case"
+runApplication $(getApplication)
+
+#------------------------------------------------------------------------------

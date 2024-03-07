@@ -1,0 +1,28 @@
+// * * * Variables for PCHE * * * //
+
+// * Input parameters * //
+ThInlet	475.45;                         			// Temperature maximum and Hot inlet
+TcInlet	296.65;                        		    	// Temperature minimum and Cold inlet
+Tref	#eval{ 0.5*$ThInlet + 0.5*$TcInlet };	// Hot side friction factor correlation (perpendicular)
+MFRc	0.0538;
+MFRh	0.0538;
+
+// * Heat transfer parameters (Nu = a Re^b Pr^c) * //
+Dh		0.0015;                                     // Hydraulic diameter
+por_h		0.211;                                      // Hot side porosity
+por_c		0.264;						                // Cold side porosity
+a_h		    0.023;  						            // Hot side Nusselt constant
+a_c		    0.023;  						            // Cold side Nusselt constant
+b		    0.8;						                // Reynolds number power
+c_h		    0.4;						                // Hot side Prandtl number power
+c_c		    0.3;						                // Cold side Prandtl number power
+Pr_h		0.85;						                // Hot side Prandtl number
+Pr_c		0.85;						                // Cold side Prandtl number
+f_Re_h		0.04527; // (value based on Re=13780)	    // Hot side friction factor correlation
+f_par_h		#eval{ $f_Re_h/$Dh };	    				// Hot side friction factor correlation (parallel)
+CF_h		1000;						                // Hot side cross flow factor
+f_per_h		#eval{ $CF_h*$f_Re_h/$Dh };					// Hot side friction factor correlation (perpendicular)
+f_Re_c		0.04646; // (value based on Re=11340)		// Cold side friction factor correlation
+f_par_c		#eval{ $f_Re_c/$Dh };						// Cold side friction factor correlation (parallel)
+CF_c		1000;						                // Cold side cross flow factor
+f_per_c		#eval{ $CF_c*$f_Re_c/$Dh };					// Cold side friction factor correlation (perpendicular)
