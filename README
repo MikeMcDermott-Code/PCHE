@@ -33,17 +33,13 @@ wmake
 
 ------- Some Notes ------- 
 
-- The Cases directory contains the 2 developed cases for the Airfin HX and ZigZag HX. The files systems are very
-similair but are seperated for easy use.
+- The Cases directory contains the 2 developed cases for the Airfin HX and ZigZag HX. The file systems are very similar but are separated for easy use.
 
-- The Variables.txt file contains key variables such as inlet temperature, Nusselt number values etc.
-The relevant #include code is used throughout the case so that the user only needs to adjust this file.
+- The Variables.txt file contains key variables such as inlet temperature, Nusselt number values etc. The relevant #include code is used throughout the case so that the user only needs to adjust this file.
 
-- The Geometry.txt file contains key values such as channel length, channel width etc. This is important for 
-the Mesh contruction in Cases/<CaseName>/<region>/system/blockMeshDict.
+- The Geometry.txt file contains key values such as channel length, channel width etc. This is important for the Mesh construction in Cases/<CaseName>/<region>/system/blockMeshDict.
 
-- The Cases/<CaseName>/<region>/constant directory contains porousZones where you can specify the friction factor terms.
-The naming of the cellZones here are linked back to the blockMeshDict file (e.g. RegionI, RegionII...).
+- The Cases/<CaseName>/<region>/constant directory contains porousZones where you can specify the friction factor terms. The naming of the cellZones here are linked back to the blockMeshDict file (e.g. RegionI, RegionII...).
 
 - The thermophysicalProperties file is dynamically linked to the thermoData directory, which has tabulated data based on pressure values.
 
