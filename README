@@ -7,7 +7,7 @@
 # OpenFOAM:    version v2212 (Foundation)         #
 #-------------------------------------------------#
 # Association: The University of Sheffield        #
-# Email:       m.mcdermott@sheffield.ac.uk       #
+# Email:       m.mcdermott@sheffield.ac.uk        #
 #-------------------------------------------------#
 
 The following README file contains instructions for the OpenFOAM package for the macro scale printed circuit heat exchanger. Full paper found here: https://doi.org/10.1016/j.nucengdes.2024.113084
